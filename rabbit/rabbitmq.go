@@ -23,12 +23,15 @@ var retryQueues = []struct {
 	{QueueName + ".retry.15m", 900000},
 	{QueueName + ".retry.30m", 1800000},
 	{QueueName + ".retry.1h", 3600000},
+	{QueueName + ".retry.5h", 18000000},
+	{QueueName + ".retry.10h", 36000000},
+	{QueueName + ".retry.24h", 86400000},
 }
 
 type RabbitMQ struct {
-	conn       *amqp.Connection
-	publishCh  *amqp.Channel
-	consumeCh  *amqp.Channel
+	conn      *amqp.Connection
+	publishCh *amqp.Channel
+	consumeCh *amqp.Channel
 }
 
 func New(amqpURL string) (*RabbitMQ, error) {

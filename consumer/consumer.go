@@ -203,8 +203,8 @@ func backoff(retryCount int) time.Duration {
 	duration := 30 * time.Second
 	for i := 1; i < retryCount; i++ {
 		duration *= 2
-		if duration > time.Hour {
-			duration = time.Hour
+		if duration > 24*time.Hour {
+			duration = 24 * time.Hour
 			break
 		}
 	}
