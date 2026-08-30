@@ -34,6 +34,13 @@ func main() {
 		log.Printf("[main] default subscription created: %s", subURL)
 	}
 
+	sub2URL := envOr("SUBSCRIPTION_URL_2", "http://localhost:9091/webhook")
+	if _, err := database.CreateSubscription("secondary", sub2URL); err != nil {
+		log.Printf("[main] secondary subscription already exists or error: %v", err)
+	} else {
+		log.Printf("[main] secondary subscription created: %s", sub2URL)
+	}
+
 	mq, err := rabbit.New(rabbitURL)
 	if err != nil {
 		log.Fatalf("rabbitmq init: %v", err)
